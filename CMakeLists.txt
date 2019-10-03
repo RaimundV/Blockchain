@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 project(BlockchainHashing)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
-add_executable(BlockchainHashing main.cpp)
+add_executable(BlockchainHashing Source/main.cpp)
