@@ -1,11 +1,9 @@
-//
-// Created by 123 on 2019-10-03.
-//
-
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cmath>
+#include "recountVector.h"
 
 #ifndef BLOCKCHAINHASHING_HASHING_H
 #define BLOCKCHAINHASHING_HASHING_H
@@ -19,37 +17,56 @@ std::string ToHex(long int hashedString)
     return hash;
 }
 
-long long int recount(long long int _number, int _times = 3)
+unsigned long long int recount(unsigned long long int _number, int _times = 2)
 {
-    long long int uplimit = 9999999999;
-    long long int lowlimit= 1000000000;
+    long long int uplimit = 99999999;
+    long long int lowlimit= 10000000;
     if (_number > uplimit)
-        return (_number - ((_number - uplimit) * _times));
+        _number = recount(_number - ((_number - uplimit) * _times));
     if (_number < lowlimit)
-        return (_number + ((lowlimit - _number) * _times));
+        _number = recount(_number + (lowlimit * _times));
 
     return _number;
 }
 
-std::string hashing(std::vector <long long int> _ascii, int _length)
+unsigned long long int avgAscii(std::vector <unsigned long long int> _ascii)
+{
+    long long int num = 0;
+
+    for (int i = 0; i < _ascii.size(); i++)
+    {
+        num += _ascii[i];
+    }
+
+    return num / _ascii.size();
+}
+
+std::string hashing(std::vector <unsigned long long int> _ascii, int _length)
 {
     std::string hashed = "";
-    int randNumL1 = 214;
-    int randNumL2 = 953;
-    int randNumL3 = 5;
-    int delL      = 3;
 
-    int randNum1 = 31;
-    int randNum2 = 75;
-    int randNum3 = 532;
-    int del      = 2;
+    std::vector <unsigned long long int> hasher = { 123, 35, 62, 132, 54, 69, 21, 34, 41, 91, 111, 83, 55, 44, 32, 142, 47, 128, 23, 98, 96};
 
-    int value = 10;
+    int value = 20;
     int size = _ascii.size() - 1;
 
     for (int i = 0; i < value - size; i++)
     {
-        _ascii.push_back(_ascii[1] / 3 + (100 * (i + 1)));
+        switch(avgAscii(_ascii) % 3)
+        {
+            case 0:
+                _ascii.push_back( hasher[avgAscii(_ascii) % 10] );
+                break;
+            case 1:
+                _ascii.push_back( hasher[(avgAscii(_ascii) % 11) + 10] );
+                break;
+            case 2:
+                _ascii.push_back( hasher[avgAscii(_ascii) % 6 * 2] );
+                break;
+            default:
+                _ascii.push_back( hasher[avgAscii(_ascii) % 21] );
+                break;
+        }
     }
 
     for (int i = value+1; i < _ascii.size(); i++)
@@ -60,12 +77,14 @@ std::string hashing(std::vector <long long int> _ascii, int _length)
             _ascii[value] += _ascii[i];
     }
 
-    _ascii[0] = (_ascii[0] * randNumL2 * randNumL1 * randNumL3) / delL;
-    _ascii[0] = recount(_ascii[0]);
-    for (int i = 1; i <= value; i++)
+    if (_ascii.size() > value + 1)
+        _ascii.erase(_ascii.begin() + value + 1, _ascii.end());
+
+    _ascii = hashRecount(_ascii, hasher, (_ascii[0] + _ascii[1]) % 4);
+
+    for (int i = 0; i < _ascii.size(); i++)
     {
-        _ascii[i] = (_ascii[i] * randNum2 * randNum1 * randNum3);
-        _ascii[i] = recount(_ascii[i], i);
+        _ascii[i] = recount(_ascii[i]);
     }
 
     for (int i = 0; i <= value; i++)
@@ -78,16 +97,13 @@ std::string hashing(std::vector <long long int> _ascii, int _length)
 
 std::string stringToAscii(std::string _input)
 {
-    std::vector <long long int> ascii;
+    std::vector <unsigned long long int> ascii;
     ascii.clear();
     ascii.push_back(_input.length());
 
-    for (int i = 1; i <= _input.length(); i++)
+    for (int i = 0; i < _input.length(); i++)
     {
-        if (_input[i] % 2 == 0)
-            ascii.push_back( _input[i] + (100 * i) );
-        else
-            ascii.push_back( (_input[i] + (100 - i * 4)) < 0 ? (_input[i] + (100 - i * 4)) * -1: _input[i] + (100 - i * 4)) ;
+        ascii.push_back( (unsigned long long int) _input[i] );
     }
 
     return hashing(ascii, _input.length());
