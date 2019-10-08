@@ -3,6 +3,8 @@
 #include <sstream>
 #include <vector>
 #include <cmath>
+#include <chrono>
+#include <fstream>
 #include "recountVector.h"
 
 #ifndef BLOCKCHAINHASHING_HASHING_H
@@ -22,7 +24,7 @@ unsigned long long int recount(unsigned long long int _number, int _times = 2)
     long long int uplimit = 99999999;
     long long int lowlimit= 10000000;
     if (_number > uplimit)
-        _number = recount(_number - ((_number - uplimit) * _times));
+        _number = recount(_number - ((_number - uplimit)));// * _times));
     if (_number < lowlimit)
         _number = recount(_number + (lowlimit * _times));
 
@@ -95,10 +97,43 @@ std::string hashing(std::vector <unsigned long long int> _ascii, int _length)
     return hashed;
 }
 
-std::string stringToAscii(std::string _input)
+long long int stringToAscii(std::string _input)
 {
     std::vector <unsigned long long int> ascii;
-    ascii.clear();
+    ascii.erase(ascii.begin(), ascii.end());
+    auto start = std::chrono::high_resolution_clock::now();
+    ascii.push_back(_input.length());
+
+    for (int i = 0; i < _input.length(); i++)
+    {
+        ascii.push_back( (unsigned long long int) _input[i] );
+    }
+
+    std::string hash = hashing(ascii, _input.length());
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
+
+    std::cout << _input << " = " << hash << std::endl;
+    std::cout << "In " << duration.count() << " nanoseconds" << std::endl;
+
+    std::ofstream fileOut;
+
+    fileOut.open("..\\Output files\\output.txt", std::fstream::app);
+
+    fileOut << hash + "\n\r";
+    fileOut.close();
+
+    return duration.count();
+}
+
+std::string stringToAsciiDiffCheck(std::string _input)
+{
+    std::vector <unsigned long long int> ascii;
+
+    ascii.erase(ascii.begin(), ascii.end());
+
     ascii.push_back(_input.length());
 
     for (int i = 0; i < _input.length(); i++)
