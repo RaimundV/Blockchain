@@ -178,32 +178,52 @@ void option6()
 
 void option7()
 {
-    int limit = 1000000;
+    int limit = 100000;
     std::string symbolset1, symbolset2, hash1, hash2;
+
+    double symbolCounter;
+    int counter;
+    double size;
+    double sum = 0;
+    double min = 100000;
+    double max = 0;
 
     for (int i = 0; i < limit; i++)
     {
         symbolset1 = random_string(5);
         symbolset2 = symbolset1;
-        symbolset2[3] = symbolset2[3] - 2;
-
+        counter = 0;
+        while (symbolset2 == symbolset1)
+        {
+            symbolset2[counter % 5] = symbolset2[counter % 5] + 1;
+            counter ++;
+        }
 
         hash1 = stringToAsciiDiffCheck(symbolset1);
         hash2 = stringToAsciiDiffCheck(symbolset2);
-        if (hash1 != hash2)
+
+        size = hash1.length();
+        symbolCounter = 0;
+        for (int y = 0; y < size; y++)
         {
-            std::cout << symbolset1 << " good " << symbolset2 << i << std::endl;
-        }
-        else
-        {
-            if (symbolset1 != symbolset2)
+            if (hash1[y] != hash2[y])
             {
-                std::cout << "bad" << std::endl;
-                std::cout << symbolset1 << " " << symbolset2 << std::endl;
-                break;
+                symbolCounter++;
             }
         }
+
+        if (symbolCounter > max)
+            max = symbolCounter;
+
+        if (symbolCounter < min)
+            min = symbolCounter;
+
+        sum += symbolCounter;
     }
+
+    std::cout << "Average: " << sum * 100 / (size * limit) << std::endl;
+    std::cout << "Min: " << min * 100 / size << std::endl;
+    std::cout << "Max: " << max * 100 / size << std::endl;
 }
 
 
@@ -219,7 +239,7 @@ int main()
     std::cout << "4. write your own inputs" << std::endl;
     std::cout << "5. Konstitucija.txt test" << std::endl;
     std::cout << "6. 1000000 random pairs" << std::endl;
-    std::cout << "7. 1000000 random pairs with 1 symbol difference" << std::endl;
+    std::cout << "7. 100000 random pairs with 1 symbol difference" << std::endl;
     std::cout << "input choice: ";
     std::cin >> choice;
 
