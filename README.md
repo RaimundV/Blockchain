@@ -42,6 +42,10 @@ Mano atveju eina patikrinimai per visus sugenerotus simbolius ir jeigu randa tok
 
 ## 7. 100000 random pairs with 1 symbol difference
 
-Average: 41.0173
-Min: 13.6054
-Max: 50.3401
+Average - kiek vidutiniškai simbolių skiriasi tarp hash'ų
+Min - kiek minimaliai simbolių skiriasi tarp hash'ų
+Max - kiek maksimaliai simbolių skiriasi tarp hash'ų
+
+Average: 41.0173%
+Min: 13.6054%
+Max: 50.3401%
