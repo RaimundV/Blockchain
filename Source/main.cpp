@@ -235,7 +235,7 @@ int main()
     std::cout << "Tests:" << std::endl;
     std::cout << "1. 2 files 1 symbol each" << std::endl;
     std::cout << "2. 2 files 10000 symbols each" << std::endl;
-    std::cout << "3. 2 files different amount of symbols" << std::endl;
+    std::cout << "3. 2 files with 1 different symbol" << std::endl;
     std::cout << "4. write your own inputs" << std::endl;
     std::cout << "5. Konstitucija.txt test" << std::endl;
     std::cout << "6. 1000000 random pairs" << std::endl;
