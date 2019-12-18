@@ -21,8 +21,8 @@ std::string ToHex(long int hashedString)
 
 unsigned long long int recount(unsigned long long int _number, int _times = 2)
 {
-    long long int uplimit = 99999999;
-    long long int lowlimit= 10000000;
+    long long int uplimit = 9999999;
+    long long int lowlimit= 1000000;
     if (_number > uplimit)
         _number = recount(_number - ((_number - uplimit)));// * _times));
     if (_number < lowlimit)
@@ -47,9 +47,11 @@ std::string hashing(std::vector <unsigned long long int> _ascii, int _length)
 {
     std::string hashed = "";
 
-    std::vector <unsigned long long int> hasher = { 123, 35, 62, 132, 54, 69, 21, 34, 41, 91, 111, 83, 55, 44, 32, 142, 47, 128, 23, 98, 96};
+    std::vector <unsigned long long int> hasher = { 123, 335, 762, 132, 254, 369, 421, 234, 741, 191,
+                                                    111, 83, 455, 244, 132, 142, 347, 128, 623, 398, 296,
+                                                    215, 333, 159, 420, 320, 301, 555, 101, 196, 299};
 
-    int value = 20;
+    int value = 30;
     int size = _ascii.size() - 1;
 
     for (int i = 0; i < value - size; i++)

@@ -4,6 +4,9 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
+#include "../headers/blockchain.h"
+#include "../headers/block.h"
+#include "transactions.cpp"
 
 void option1()
 {
@@ -227,48 +230,61 @@ void option7()
 }
 
 
+void option8()
+{
+    generateUsers();
+}
+
 int main()
 {
     std::string inputWord;
-    int         choice;
+    int         choice = 1;
 
-    std::cout << "Tests:" << std::endl;
-    std::cout << "1. 2 files 1 symbol each" << std::endl;
-    std::cout << "2. 2 files 10000 symbols each" << std::endl;
-    std::cout << "3. 2 files with 1 different symbol" << std::endl;
-    std::cout << "4. write your own inputs" << std::endl;
-    std::cout << "5. Konstitucija.txt test" << std::endl;
-    std::cout << "6. 1000000 random pairs" << std::endl;
-    std::cout << "7. 100000 random pairs with 1 symbol difference" << std::endl;
-    std::cout << "input choice: ";
-    std::cin >> choice;
-
-    switch (choice)
+    while (choice != 0)
     {
-        case 1:
-            option1();
-            break;
-        case 2:
-            option2();
-            break;
-        case 3:
-            option3();
-            break;
-        case 4:
-            option4();
-            break;
-        case 5:
-            option5();
-            break;
-        case 6:
-            option6();
-            break;
-        case 7:
-            option7();
-            break;
-        default:
-            std::cout << "There is no such option" << std::endl;
-            break;
+        std::cout << "Tests:" << std::endl;
+        std::cout << "1. 2 files 1 symbol each" << std::endl;
+        std::cout << "2. 2 files 10000 symbols each" << std::endl;
+        std::cout << "3. 2 files with 1 different symbol" << std::endl;
+        std::cout << "4. write your own inputs" << std::endl;
+        std::cout << "5. Konstitucija.txt test" << std::endl;
+        std::cout << "6. 1000000 random pairs" << std::endl;
+        std::cout << "7. 100000 random pairs with 1 symbol difference" << std::endl;
+        std::cout << "8. blockchain" << std::endl;
+        std::cout << "input choice: ";
+        std::cin >> choice;
+
+        switch (choice) {
+            case 0:
+                break;
+            case 1:
+                option1();
+                break;
+            case 2:
+                option2();
+                break;
+            case 3:
+                option3();
+                break;
+            case 4:
+                option4();
+                break;
+            case 5:
+                option5();
+                break;
+            case 6:
+                option6();
+                break;
+            case 7:
+                option7();
+                break;
+            case 8:
+                option8();
+                break;
+            default:
+                std::cout << "There is no such option" << std::endl;
+                break;
+        }
     }
 
     return 0;
