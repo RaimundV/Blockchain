@@ -8,6 +8,7 @@ CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj
  C:/Users/123/CLionProjects/BlockchainHashing/headers/block.h
  C:/Users/123/CLionProjects/BlockchainHashing/headers/blockchain.h
  C:/Users/123/CLionProjects/BlockchainHashing/headers/hashing.h
+ C:/Users/123/CLionProjects/BlockchainHashing/headers/myMerkle.h
  C:/Users/123/CLionProjects/BlockchainHashing/headers/recountVector.h
  C:/Users/123/CLionProjects/BlockchainHashing/headers/transactionList.h
  C:/Users/123/CLionProjects/BlockchainHashing/headers/userList.h

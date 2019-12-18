@@ -43,10 +43,8 @@ cstdint
 -
 vector
 -
-hashing.h
-C:/Users/123/CLionProjects/BlockchainHashing/headers/hashing.h
-transactionList.h
-C:/Users/123/CLionProjects/BlockchainHashing/headers/transactionList.h
+myMerkle.h
+C:/Users/123/CLionProjects/BlockchainHashing/headers/myMerkle.h
 
 C:/Users/123/CLionProjects/BlockchainHashing/headers/block.h
 iostream
@@ -55,10 +53,8 @@ cstdint
 -
 vector
 -
-hashing.h
-C:/Users/123/CLionProjects/BlockchainHashing/headers/hashing.h
-transactionList.h
-C:/Users/123/CLionProjects/BlockchainHashing/headers/transactionList.h
+myMerkle.h
+C:/Users/123/CLionProjects/BlockchainHashing/headers/myMerkle.h
 
 C:/Users/123/CLionProjects/BlockchainHashing/headers/blockchain.h
 cstdint
@@ -85,6 +81,12 @@ fstream
 -
 recountVector.h
 C:/Users/123/CLionProjects/BlockchainHashing/headers/recountVector.h
+
+C:/Users/123/CLionProjects/BlockchainHashing/headers/myMerkle.h
+transactionList.h
+C:/Users/123/CLionProjects/BlockchainHashing/headers/transactionList.h
+hashing.h
+C:/Users/123/CLionProjects/BlockchainHashing/headers/hashing.h
 
 C:/Users/123/CLionProjects/BlockchainHashing/headers/recountVector.h
 vector

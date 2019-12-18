@@ -8,8 +8,7 @@
 #include <iostream>
 #include <cstdint>
 #include <vector>
-#include "hashing.h"
-#include "transactionList.h"
+#include "myMerkle.h"
 
 class Block
 {
@@ -17,6 +16,7 @@ public:
 
     std::string Hash;
     std::string PrevHash;
+    std::string MerkleHash;
 
     Block(uint32_t blockIdx, TransAction transIn);
 
@@ -68,14 +68,14 @@ void Block::MineBlock(uint32_t nDifficulty)
 inline std::string Block::_CalculateHash()
 {
     std::stringstream ss;
-    std::string       transIdCombo = "";
-
-    //TODO: add merkle tree?
+    std::vector<std::string>    transIdCombo;
 
     for (auto i = 0; i < trans.size(); i++)
-        transIdCombo += trans[i].returnId();
+        transIdCombo.emplace_back(trans[i].returnId());
 
-    ss << block << PrevHash << Time << transIdCombo << Nonce;
+    MerkleHash = createMerkle(transIdCombo)[0];
+
+    ss << block << PrevHash << Time << MerkleHash << Nonce;
 
     return stringToAsciiDiffCheck(ss.str());
 }
@@ -84,9 +84,17 @@ void Block::addTransAction(TransAction newTrans) {
 
     if (newTrans.returnId() == stringToAsciiDiffCheck(newTrans.returnStrCombo()))
     {
-        trans.emplace_back(newTrans);
+        if (trans[0].returnId() != "")
+        {
+            trans.emplace_back(newTrans);
 
-        Hash = _CalculateHash();
+            Hash = _CalculateHash();
+        }
+        else
+        {
+            trans[0] = newTrans;
+        }
+
     }
 }
 

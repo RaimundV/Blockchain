@@ -7,6 +7,7 @@ CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj: ../headers/Block.h
 CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj: ../headers/block.h
 CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj: ../headers/blockchain.h
 CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj: ../headers/hashing.h
+CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj: ../headers/myMerkle.h
 CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj: ../headers/recountVector.h
 CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj: ../headers/transactionList.h
 CMakeFiles/BlockchainHashing.dir/Source/main.cpp.obj: ../headers/userList.h

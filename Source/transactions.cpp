@@ -25,14 +25,14 @@ void generateUsers()
 
     for (auto i = 0; i < amount / 10; i++)
     {
-        user[i].AddUser(i + 1, "user" + std::to_string(i + 1), "surname" + std::to_string(i + 1), amount);
+        user[i].AddUser(i + 1, "user" + std::to_string(i + 1), "surname" + std::to_string(i + 1), amount * 10);
     }
 
     //transactions
     for (auto i = 0; i < amount; i++)
     {
         userFrom = (rand() % amount);
-        amountMoney = (rand() % amount / 2) + 1;
+        amountMoney = (rand() % amount / 10) + 1;
         userTo = (rand() % amount);
 
         time (&rawtime);
@@ -44,7 +44,7 @@ void generateUsers()
 
         if (!user[userFrom].tranaction(amountMoney, user[userTo]))
         {
-            std::cout << user[userFrom].userNameAndSurname() << " does not have enough money: " << amountMoney << std::endl;
+            //std::cout << user[userFrom].userNameAndSurname() << " does not have enough money: " << amountMoney << std::endl;
             i--;
         }
         else
@@ -95,4 +95,12 @@ void generateUsers()
     bChain.AddBlock(_1C);
     bChain.AddBlock(_1D);
     bChain.AddBlock(_1E);
+
+    std::cout << std::endl;
+    std::cout << "merkle hashes" << std::endl;
+    std::cout << "1 A: " << _1A.MerkleHash << std::endl;
+    std::cout << "1 B: " << _1B.MerkleHash << std::endl;
+    std::cout << "1 C: " << _1C.MerkleHash << std::endl;
+    std::cout << "1 D: " << _1D.MerkleHash << std::endl;
+    std::cout << "1 E: " << _1E.MerkleHash << std::endl;
 }
